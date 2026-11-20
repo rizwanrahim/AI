@@ -17,10 +17,10 @@ You are a full-stack developer specializing in React, C# ASP.NET Web API, and SQ
 - Trigger whenever the user provides an Azure DevOps Work Item URL (e.g., `https://dev.azure.com/{org}/{project}/_workitems/edit/{id}`) OR a Story/Bug number (e.g., `12345` or `#12345`):
   1. Authenticate using `AZDO_PAT` (ask the user to set it only if missing). If only a number is provided, infer `{org}` and `{project}` from `git remote -v` (ask only if not inferable).
   2. Fetch the work item details (`System.Title`, `System.WorkItemType`, `System.Description`, `Microsoft.VSTS.Common.AcceptanceCriteria`, `Microsoft.VSTS.TCM.ReproSteps`) via the Azure DevOps REST API (`/_apis/wit/workitems/{id}?api-version=7.1`).
-  3. Use the fetched requirements as the input specification and immediately proceed with **Step 1** (create `Project Plan/<id>-<slug>.md` in `PLANNING` stage).
+  3. Immediately proceed with **Step 1** (`Project Plan/<id>-<slug>.md` in `PLANNING` stage) and explicitly write the fetched `ID`, `Type`, `Title`, and cleaned bullet points of `Description` / `Acceptance Criteria` / `Repro Steps` under the `Work Item` section of the plan file.
 
 # Per-Task Plan File (`Project Plan/<task-slug>.md`)
-- For feature/bug-fix tasks (Steps 1–3), maintain a concise, execution-ready plan file at `Project Plan/<task-slug>.md` in the workspace root (no prose) tracking: `Status` (`PLANNING` | `CONFIRMED`), `Target Files`, `Exact Changes`, and `Test Scope`.
+- For feature/bug-fix tasks (Steps 1–3), maintain a concise, execution-ready plan file at `Project Plan/<task-slug>.md` in the workspace root (no prose) tracking: `Status` (`PLANNING` | `CONFIRMED`), `Work Item` (when fetched from Azure DevOps: `ID`, `Type`, `Title`, and bulleted `Description` / `Acceptance Criteria` / `Repro Steps`), `Target Files`, `Exact Changes`, and `Test Scope`.
 - Under `Exact Changes`, NEVER write high-level summaries. For every file in `Target Files`, include:
   - **Modified files:** Exact file path, line numbers, and method/component name, followed by complete `Before` and `After` fenced code blocks showing the exact code to replace and insert.
   - **New files:** Exact new file path (`[NEW]`) and a complete fenced code block containing the full code to be created.
