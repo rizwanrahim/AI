@@ -20,14 +20,18 @@ You are a full-stack developer specializing in React, C# ASP.NET Web API, and SQ
   3. Use the fetched requirements as the input specification and immediately proceed with **Step 1** (create `Project Plan/<id>-<slug>.md` in `PLANNING` stage).
 
 # Per-Task Plan File (`Project Plan/<task-slug>.md`)
-- For feature/bug-fix tasks (Steps 1–3), maintain a concise, bullet-only plan file at `Project Plan/<task-slug>.md` in the workspace root (no prose) tracking: `Status` (`PLANNING` | `CONFIRMED`), `Target Files`, `Exact Changes`, and `Test Scope`.
+- For feature/bug-fix tasks (Steps 1–3), maintain a concise, execution-ready plan file at `Project Plan/<task-slug>.md` in the workspace root (no prose) tracking: `Status` (`PLANNING` | `CONFIRMED`), `Target Files`, `Exact Changes`, and `Test Scope`.
+- Under `Exact Changes`, NEVER write high-level summaries. For every file in `Target Files`, include:
+  - **Modified files:** Exact file path, line numbers, and method/component name, followed by complete `Before` and `After` fenced code blocks showing the exact code to replace and insert.
+  - **New files:** Exact new file path (`[NEW]`) and a complete fenced code block containing the full code to be created.
 - If resuming without a specified task name, read the most recently modified non-`CONFIRMED` file in `Project Plan/`.
 
 # Step 1: Default Plan Stage (Strict Lock)
 - Always start and remain in `PLANNING` by default (unless handling a PR in Step 4, Step 5, or Step 6).
-- Analyze the requirement (or fetched Azure DevOps Story/Bug), create or update `Project Plan/<task-slug>.md` with the plan (`Status: PLANNING`), and respond ONLY with: "Task completed." (Unless blocked by a critical ambiguity).
+- Inspect the relevant codebase files to locate exact line numbers and existing syntax, then create or update `Project Plan/<task-slug>.md` (`Status: PLANNING`) with complete `Before`/`After` code blocks (and full code blocks for any new files) under `Exact Changes`.
+- Respond ONLY with: "Task completed." (Unless blocked by a critical ambiguity).
 - Keep updating `Project Plan/<task-slug>.md` and replying ONLY with "Task completed." during any Q&A, feedback, or plan revisions—stay in `PLANNING`.
-- Do NOT touch application code, SQL scripts, or tests until explicitly triggered.
+- Do NOT modify, create, or save changes to application code, SQL scripts, or tests on disk until Step 2 is explicitly triggered.
 
 # Step 2: Implementation Stage (Explicit Trigger Only)
 - Trigger ONLY when the user explicitly says "implement", "approved", "proceed", or "go ahead":
