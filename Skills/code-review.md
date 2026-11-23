@@ -1,34 +1,30 @@
 ---
 name: code-review
-description: Evaluates PR code review feedback, applies targeted code fixes only when genuinely required, and generates a single-paragraph reply prefixed with the resolution status. Use when resolving code review comments or auditing PR feedback.
+description: Evaluates a PR review comment, changes code only if valid, and replies in one short line prefixed with the resolution status. Use when resolving PR review comments.
 ---
 
-# Code Review Rules
+# Code Review
 
-Evaluate the reported code review comment against the codebase and respond by strictly adhering to the following constraints:
+Check the comment against the actual code, including callers and middleware.
 
-- Change Only When Required: Modify code ONLY if the review comment identifies a genuine bug, security risk, performance issue, or broken requirement. Do NOT alter working code for subjective style preferences or invalid feedback.
-- Mandatory Prefix: Begin the reply with an exact prefix from the allowed list below, followed by a colon and a single space (`<Prefix>: <explanation>`).
-- Format: Output ONLY a single line or a single continuous paragraph.
-- No Formatting Breaks: Do NOT use line breaks, newlines, bullet points, numbered lists, or markdown headers inside the reply.
-- Clarity & Brevity: State clearly what was changed or why no code change was needed. Do not include conversational filler before or after the reply.
+Change code only for a real bug, security risk, performance issue, or broken requirement. Never for style or invalid feedback.
 
-## Allowed Prefixes
+Reply with one short line, no line breaks or lists, with no text before or after:
 
-Use the exact prefix matching the action taken:
+`<Prefix>: <what changed or why nothing did>`
 
-- `Fixed:` — a valid bug, security risk, or edge case was confirmed and patched
-- `Added:` — missing validation, error handling, test coverage, or safeguard was added as requested
-- `False Positive:` — the flagged issue does not exist or is already prevented elsewhere in the code
-- `Handled Upstream:` — validation, sanitization, or error handling already occurs in a parent component, middleware, or caller
-- `By Design:` — the current behavior matches explicit business rules or domain requirements
-- `Out of Scope:` — valid suggestion, but unrelated to the current story/PR and deferred to a separate task
+## Prefixes
+
+- `Fixed:` Use when you confirmed and patched a real bug, security risk, or edge case.
+- `Added:` Use when you added missing validation, error handling, tests, or a safeguard.
+- `False Positive:` Use when the flagged issue doesn't exist or is already prevented in the code.
+- `Handled Upstream:` Use when a parent, caller, or middleware already handles it.
+- `By Design:` Use when the behavior matches an explicit business or domain rule.
+- `Out of Scope:` Use when the feedback is valid but unrelated to this PR and deferred.
+
+If two prefixes fit, prefer the one for the action you took (`Fixed:` or `Added:`).
 
 ## Examples
 
-- `Fixed: added a null check on the userId claim in UserController.cs before parsing so missing tokens return a 401 Unauthorized response instead of throwing a NullReferenceException.`
-- `Added: unit test coverage in OrderServiceTests.cs for empty cart submissions and discount boundary validation.`
-- `False Positive: the SQL query already uses parameterized Dapper bindings via @OrderId, so it is protected against SQL injection and no code changes are needed.`
-- `Handled Upstream: payload schema and required field checks are already enforced by the FluentValidation filter before reaching this controller action.`
-- `By Design: soft-deleted records are intentionally excluded at the repository query layer to satisfy the audit retention requirement.`
-- `Out of Scope: refactoring the shared grid column builder is a valid improvement, and it will be tracked separately to keep this bugfix PR minimal.`
+- `Fixed: added a null check on userId in UserController.cs so missing tokens return 401.`
+- `Handled Upstream: FluentValidation already enforces required fields before this action runs.`
