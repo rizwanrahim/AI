@@ -1,31 +1,25 @@
 ---
 name: commit-message
-description: Generates concise, single-paragraph Git commit messages with standardized past-tense action prefixes. Use when asked to write, draft, or format a commit message for code changes.
+description: Writes a one-line Git commit message with a lowercase past-tense prefix. Use when asked to write or format a commit message.
 ---
 
-# Commit Message Rules
+# Commit Message
 
-Generate a Git commit message summarizing the staged or provided code changes by strictly adhering to the following constraints:
+Summarize the changes as one line, no line breaks or lists, with no text before or after:
 
-1. **Format:** Output ONLY a single line or a single continuous paragraph.
-2. **No Formatting Breaks:** Do NOT use line breaks, newlines, bullet points, numbered lists, or markdown headers inside the message.
-3. **Mandatory Prefix:** Begin the message with a lowercase past-tense action prefix from the allowed list below, followed by a colon and a single space (`<prefix>: <summary>`).
-4. **Clarity & Brevity:** Keep the description direct, specific, and focused on *what* changed and *why*. Do not include conversational filler before or after the commit message.
+`<prefix>: <what changed and why>`
 
-## Allowed Prefixes
+If a commit has several changes, pick the prefix for the main one.
 
-Use the most accurate past-tense verb for the primary change:
+## Prefixes
 
-- `added:` — new files, features, components, endpoints, or tests
-- `updated:` — enhancements, modifications, or configuration changes to existing behavior
-- `fixed:` — bug fixes, error handling, or edge-case corrections
-- `refactored:` — code restructuring without changing external behavior
-- `resolved:` — merge conflicts, review comments, or tracked issue resolutions
-- `removed:` — deletion of unused files, dead code, or dependencies
+- `added:` Use when you create something new: files, features, endpoints, components, or tests.
+- `updated:` Use when you change or improve something that already exists, including config changes.
+- `fixed:` Use when you correct a bug, error, or edge case.
+- `refactored:` Use when you restructure code and behavior stays the same.
+- `resolved:` Use when you settle a merge conflict, address review comments, or close a tracked issue.
+- `removed:` Use when you delete files, dead code, or dependencies.
 
-## Examples
+## Example
 
-- `added: style.css file to align the main container in the center.`
-- `fixed: null reference exception in user authentication middleware when token header is missing.`
-- `refactored: SQL query builder logic into a dedicated repository helper and updated unit tests to match the new signature.`
-- `resolved: PR review feedback by adding input validation on the payload DTO and handling timeout errors.`
+`fixed: null reference in auth middleware when the token header is missing.`
