@@ -9,12 +9,12 @@ Follow these rules strictly when generating a commit message:
 
 - **Single line only.** No multi-line messages, no bullet points, no body/footer.
 - Keep the description short and clear — ideally under 72 characters total.
-- Use lowercase for the description unless referring to a proper noun, file name, or class name.
+- **Use smallcase (lowercase) for everything** — prefix and description — except proper nouns, file names, class names, or acronyms (e.g., `spread.ts`, `API`, `JSON`).
 - No trailing period.
 
 ## Prefixes
 
-Choose the prefix that best matches the *intent* of the change:
+Choose the prefix that best matches the *intent* of the change (always lowercase):
 
 | Prefix    | Use when...                                              |
 |-----------|-----------------------------------------------------------|
@@ -33,6 +33,7 @@ Choose the prefix that best matches the *intent* of the change:
 - Explain **what** changed and, briefly, **why**, if relevant.
 - Reference the affected file or module when it adds clarity (e.g., `spread.ts`).
 - Avoid vague messages like "fix bug" or "update code" — be specific.
+- Keep everything lowercase.
 
 ## Examples
 
@@ -45,6 +46,7 @@ Choose the prefix that best matches the *intent* of the change:
 ## What to Avoid
 
 - Do not generate multiple lines, paragraphs, or commit bodies.
+- Do not capitalize the first letter of the description.
 - Do not use vague prefixes like `fix` alone without a clear target.
 - Do not include ticket numbers or issue references unless explicitly requested.
 - Do not add trailing punctuation.
